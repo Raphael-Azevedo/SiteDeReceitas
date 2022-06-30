@@ -1,0 +1,25 @@
+@model desafio_mvc.DTO.CategoriaDTO
+@{
+    Layout = "_LayoutAdmin";
+}
+<h3>Editar Categoria</h3>
+<hr>
+<form class="form-horizontal" asp-area="Admin" asp-controller="AdminCategorias" asp-action="Edit" method="POST">
+    <input type="hidden" asp-for="CategoriaId"> 
+    <div class="form-group">
+        <label asp-for="Nome" class="control-label"></label>
+        <input type="text" asp-for="Nome" class="form-control" placeholder="Nome da categoria"/>
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Descricao" class="control-label"></label>
+        <input asp-for="Descricao" class="form-control" placeholder="Descrição da categoria"/>
+        <span asp-validation-for="Descricao" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-success" value="Atualizar" />
+    </div>
+</form>
+<div>
+    <a asp-action="Index">Voltar para a lista</a>
+</div>

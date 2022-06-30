@@ -1,0 +1,45 @@
+@model desafio_mvc.Models.ReceitaIngrediente
+
+@using HtmlHelpers.BeginCollectionItemCore;
+@{
+    //BeginCollectionItemCore already created in HtmlHelper.cs class
+}
+
+@using (Html.BeginCollectionItem("ReceitaIngredientes"))
+{
+    <div class="form-row" id="ingredientesForm">
+        <div class="form-group col-md-6">
+            <label>Nome</label>
+            <select id="ingredienteNome" class="form-control ingred" asp-for="IngredienteId"
+            asp-items='@(new SelectList(@ViewBag.Ingredientes,"IngredienteId","Nome"))'></select>
+            <span class="text-danger field-validation-valid"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label>Quantidade:</label>
+            <input asp-for="QuantidadeDeIngrediente" class="form-control" type="number" placeholder="Ex: 2" data-val="true"
+            data-val-required="O campo Quantidade é obrigatório">
+            <span class="text-danger field-validation-valid"></span>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label>Medida:</label>
+            <select class="form-control teste" id="uMedida"  asp-items='@(new SelectList(@ViewBag.Ingredientes,"IngredienteId","UnidadeDeMedida.Simbolo"))'
+            data-val-required="The UnidadeDeMedidaId field is required." disabled class="form-control"></select>
+            <span class="text-danger field-validation-valid"></span>
+        </div>
+        <button type="button" class="btn btn-danger remover">Remover
+            Ingrediente</button><br>
+    </div>
+}
+<script>
+    $(".remover").click(function () {
+        $(this).parents("#ingredientesForm").remove();
+    });
+
+
+    $("#ingredienteNome").change(function () {
+        var select = document.getElementById('ingredienteNome');
+        document.getElementById('uMedida').value = select.value;
+    });
+
+</script>

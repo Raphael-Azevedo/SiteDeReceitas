@@ -1,0 +1,107 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] PaladarFit</title>
+    <link href="~/css/all.min.css" rel="stylesheet" />
+    <link href="~/css/fontawesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/jquery.min.js"></script>
+</head>
+
+<body>
+    <header class="header" style="top: 0px;">
+        <div class="header-fixed-top">
+            <div class="head">
+                <div class="container">
+                    <div class="row col-lg-12 d-flex align-items-center justify-content-between">
+                        <label class="menu-open-icon d-lg-none" for="main-menu-switch">
+                            <span></span>
+                        </label>
+                        <h1 class="logo">
+                            <span class="h1-text"> PaladarFit - Comer com saude nunca foi tão gosotoso</span>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">
+                                <img src="/images/logo.png" alt="PaladarFit - Comer com saude nunca foi tão gosotoso"
+                                    width="30 px" height="40 px">
+                            </a>
+                        </h1>  
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            @if (@User.FindFirst("Acesso").Value == "Admin")
+                            {
+                                <a aria-label="Area Admin" class="d-none d-lg-block" asp-area="Admin" asp-controller="Admin"
+                                    asp-action="Index">
+                                    <div style="color: #4F4F4F ;">
+                                        <img alt="Area Admin" class="ico blog" src="/images/admin.png">
+                                        Área Admin
+                                    </div>
+                                </a>
+                            }
+                        }
+                        <div class="search-desk d-none d-lg-block">
+                            <form asp-action="Search" asp-controller="Home" method="GET">
+                                <input aria-label="Campo de pesquisa de receita" class="txt" id="search-query"
+                                    name="searchString" placeholder="Encontre uma receita..." type="text"
+                                    value="@ViewData["searchString"]">
+                                <button class="ico" type="submit" value="Buscador" style="font-size: 18px;">
+                                    <i class="fa fa-search" style="color:#fff"></i>
+                                </button>
+
+                            </form>
+                        </div>
+                        <label class="search-header-icon d-lg-none" for="search-header-switch">
+                            <span class="ico search"></span>
+                        </label>
+                        <div class="buttons d-none d-lg-flex align-items-center justify-content-center">
+                            <div class="user">
+                        @if (SignInManager.IsSignedIn(User))
+                        {   
+                            <form>
+                                <a asp-area="Identity" asp-area="Identity" asp-controller="Account"
+                                    asp-action="Manage" method="post" class="btn btn-default btn-flat"
+                                    style="color: black">
+                                        Olá! @User.FindFirst("FullName").Value &nbsp;
+                                </a>
+                            </form>
+                        }
+                            </label>
+                            </div>
+                        </div>
+                        <div class="buttons d-none d-lg-flex align-items-center justify-content-center">
+                            <div class="user">
+                                <div>
+                                    <partial name="_LoginPartial" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted" style="background-color:#F5DEB3 ;">
+        <div class="container">
+            &copy; 2022 - desafio_mvc
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/all.min.js"></script>
+    <script src="~/js/fonteawesome.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+@model Receita
+
+<div class="container">
+    <h2 style="margin-top: 2em;">@Model.Nome</h2>
+    <img src="/images/produtos/@Model.ImagemUrl" class="img-fluid" alt="Imagem da receita"
+        style="margin: 2em; border-radius: 10px; margin-bottom: 0 ;" width="630" height="450">
+    <div class="infos img-fluid">
+        <div class="row">
+            <div class="col-md-6 block ico-details">
+                <img src="/images/clock.png" class="icone">
+                <br>
+                <p>Tempo de Preparo:</p>
+                <p>@Model.TempoDePreparo min</p>
+            </div>
+            <div class="ico-details">
+                <img src="/images/person.png" class="icone">
+                <br>
+                <p>Autor:</p>
+                <p>@Model.NomeDoAutor</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6 block ico-details">
+                <img src="/images/dificult.png" class="icone">
+                <br>
+                <p>Difículdade: </p>
+                <p><span> @if (@Model.Dificuldade == 0)
+                        {
+                            <span>Fácil</span>
+                        }
+                        else if (@Model.Dificuldade == 1)
+                        {
+                            <span>Médio</span>
+                        }
+                        else
+                        {
+                            <span>Difícil</span>
+                        }</span></p>
+            </div>
+            <div class="col-md-6 block ico-details">
+                <img src="/images/prato.png" class="icone">
+                <br>
+                <p>Rendimento: </p>
+                <p>@Model.Rendimento Porção(es)</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ingredientes-detalhes">
+    <h2 style="color: #363636">Ingredientes</h2>
+    <br>
+    <h5>@foreach (var ingrediente in ViewBag.ReceitaIngrediente)
+        {
+            <ul>
+                @{
+                    if (@ingrediente.ReceitaId == @Model.ReceitaId)
+                    {
+                        if( @ingrediente.QuantidadeDeIngrediente > 0)
+                        {
+                        <li>@ingrediente.QuantidadeDeIngrediente @ingrediente.Ingrediente.UnidadeDeMedida.Simbolo de @ingrediente.Ingrediente.Nome;</li>
+                        }
+                        else
+                        {
+                          <li>@ingrediente.Ingrediente.Nome @ingrediente.Ingrediente.UnidadeDeMedida.Simbolo;</li>
+                        }
+                    }
+                }
+            </ul>
+        }
+    </h5>
+    <div>
+        <partial name="_ConversorPartial" />
+    </div>
+    <br>
+    <h2 style="color: #363636">Modo de Preparo</h2>
+    <br>
+    <h5>@Model.ModoDePreparo</h5>
+</div>

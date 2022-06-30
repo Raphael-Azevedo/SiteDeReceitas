@@ -1,0 +1,24 @@
+﻿@model desafio_mvc.Models.HomeViewModel;
+@{
+    ViewData["Title"] = "PaladarFit";
+}
+<link rel="stylesheet" href="~/css/site.css" />
+<div class="content">
+    <partial name="_Carousel" />
+    <br>
+    <a asp-area="" asp-controller="Home" asp-action="List" style="color: white;">
+    <button class="learn-more button-front">
+        <span class="circle" aria-hidden="true">
+            <span class="icon arrow"></span>
+        </span>
+        <span class="button-text">Ver Receitas</span>
+    </button><br>
+      </a>
+</div>
+<h2 class="more-highlights-title section-title" tabindex="0"> Destaques da semana</h2>
+<div class="row ">
+    @foreach (var Receita in Model.ReceitaPreferidos)
+    {
+        <partial name="_ReceitaResumo" for="@Receita" />
+    }
+</div>

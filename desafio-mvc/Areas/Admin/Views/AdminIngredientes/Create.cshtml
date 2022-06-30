@@ -1,0 +1,31 @@
+@model desafio_mvc.DTO.IngredienteDTO
+@{
+    Layout = "_LayoutAdmin";
+}
+<h1>Adicionar Ingrediente</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form class="form-horizontal" asp-area="Admin" asp-controller="AdminIngredientes" asp-action="Create"
+            method="post">
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input type="text" asp-for="Nome" class="form-control" placeholder="Nome do Ingrediente" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="MedidaId">Unidade de Medida</label>
+            <select class="form-control" asp-for="MedidaId"
+                asp-items='@(new SelectList(@ViewBag.UnidadesDeMedida,"MedidaId","Nome"))'></select><br>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para a lista</a>
+</div>

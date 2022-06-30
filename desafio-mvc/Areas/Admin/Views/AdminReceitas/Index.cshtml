@@ -1,0 +1,91 @@
+@model IEnumerable<desafio_mvc.Models.Receita>
+
+@{
+    Layout = "_LayoutAdmin";
+}
+
+<h1 class="text-title">Receitas</h1><br>
+<button class="button-beat">
+    <a asp-area="Admin" asp-controller="AdminReceitas" asp-action="Create" style="color: white;">
+        <span class="text">Adicionar nova receita</span>
+    </a>
+</button><br><br>
+<script>
+    $(document).ready(function () {
+        $('#receitas').DataTable({
+            "language":{
+                "lengthMenu": "Mostrando _MENU_ registros por página",
+                "zeroRecords": "Desculpa, Nada encontrado.",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "search":         "Buscar:",
+                "paginate": {
+                    "first":      "Primeiro",
+                    "last":       "Último",
+                    "next":       "Próximo",
+                    "previous":   "Anterior"
+                }
+            }
+        });
+    });
+</script>
+<table id="receitas" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Tempo de Preparo</th>
+            <th>Imagem Url</th>
+            <th>Modo de Preparo</th>
+            <th>Nome do Autor</th>
+            <th>Rendimento</th>
+            <th>Dificuldade</th>
+            <th>Ingredientes</th>
+            <th>Categoria</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var receita in Model)
+        {
+            <tr>
+                <td>@receita.ReceitaId</td>
+                <td>@receita.Nome</td>
+                <td>@receita.TempoDePreparo</td>
+                <td><img src="/images/produtos/@receita.ImagemUrl" class="img-fluid" width="50px" height="50px"></td>
+                <td>@receita.ModoDePreparo</td>
+                <td>@receita.NomeDoAutor</td>
+                <td>@receita.Rendimento</td>
+                <td> @if (@receita.Dificuldade == 0)
+                    {
+                        <span>Fácil</span>
+                    }
+                    else if (@receita.Dificuldade == 1)
+                    {
+                        <span>Médio</span>
+                    }
+                    else
+                    {
+                        <span>Difícil</span>
+                    }</td>
+                <td>@foreach (var Ingredient in ViewBag.ReceitaIngrediente)
+                    {                    
+                    <ul>
+                        @{  if(@Ingredient.ReceitaId == @receita.ReceitaId)
+                            {
+                            <li> @Ingredient.Ingrediente.Nome - Quantidade: @Ingredient.QuantidadeDeIngrediente  @Ingredient.Ingrediente.UnidadeDeMedida.Simbolo </li>                    
+                            }
+                        }
+                    </ul>
+                    }</td>
+                <td>@receita.Categoria.Nome</td>
+                <td><a class="btn btn-primary" href="/Admin/AdminReceitas/Edit/@receita.ReceitaId">Editar</a> 
+                <form asp-area="Admin" asp-action="Delete" asp-controller="AdminReceitas" style="display: inline;">
+                    <input type="hidden" name="id" id="id" value="@receita.ReceitaId">
+                    <button class="btn btn-danger" onclick="return confirm('Deseja realmente deletar?')">Deletar</button>
+                </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

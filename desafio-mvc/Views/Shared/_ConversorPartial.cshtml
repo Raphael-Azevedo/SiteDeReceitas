@@ -1,0 +1,143 @@
+<div class="conversor">
+    <h5 style="text-align: center;">Conversor de medida</h5>
+    <div class="rpnBye">
+        <input id="valor" value="1">
+        <select class="form-control" id="unidadeEntrada">
+            <option>colher de chá</option>
+            <option selected="1">colher de sopa</option>
+            <option>ml</option>
+            <option>xícara de chá</option>
+            <option>grama</option>
+        </select>
+    </div>
+    <h1 style="text-align: center;">=</h1>
+    <div class="rpnBye">
+        <input id="resultado" disabled class="form-control">
+        <select class="form-control" id="unidadeSaida">
+            <option>colher de sopa</option>
+            <option>ml</option>
+            <option selected="1">colher de chá</option>
+            <option>xícara de chá</option>
+            <option>grama</option>
+        </select>
+    </div>
+</div>
+
+<script>
+    $("#valor").change(function () {
+        var valorUnida = document.getElementById("valor").value;
+        var unidadeMedida = document.getElementById("unidadeEntrada").value;
+
+        var unidadeMedidaSaida = document.getElementById("unidadeSaida").value;
+
+        if (unidadeMedida == "colher de chá" && unidadeMedidaSaida == "colher de sopa") {
+            var valorConvertido = valorUnida / 3;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+
+        if (unidadeMedida == "colher de chá" && unidadeMedidaSaida == "colher de chá") {
+            var valorConvertido = valorUnida;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "colher de chá" && unidadeMedidaSaida == "ml") {
+            var valorConvertido = valorUnida * 5;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "colher de chá" && unidadeMedidaSaida == "xícara de chá") {
+            var valorConvertido = valorUnida / 50;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "colher de chá" && unidadeMedidaSaida == "grama") {
+            var valorConvertido = valorUnida * 3;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        
+                if (unidadeMedida == "colher de sopa" && unidadeMedidaSaida == "colher de sopa") {
+            var valorConvertido = valorUnida;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+
+        if (unidadeMedida == "colher de sopa" && unidadeMedidaSaida == "colher de chá") {
+            var valorConvertido = valorUnida * 3;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "colher de sopa" && unidadeMedidaSaida == "ml") {
+            var valorConvertido = valorUnida * 15;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "colher de sopa" && unidadeMedidaSaida == "xícara de chá") {
+            var valorConvertido = valorUnida / 16.7;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "colher de sopa" && unidadeMedidaSaida == "grama") {
+            var valorConvertido = valorUnida * 7;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+
+                if (unidadeMedida == "ml" && unidadeMedidaSaida == "colher de sopa") {
+            var valorConvertido = valorUnida / 15;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+
+        if (unidadeMedida == "ml" && unidadeMedidaSaida == "colher de chá") {
+            var valorConvertido = valorUnida / 5;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "ml" && unidadeMedidaSaida == "ml") {
+            var valorConvertido = valorUnida;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "ml" && unidadeMedidaSaida == "xícara de chá") {
+            var valorConvertido = valorUnida / 250;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "ml" && unidadeMedidaSaida == "grama") {
+            var valorConvertido = valorUnida / 120;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+
+                if (unidadeMedida == "xícara de chá" && unidadeMedidaSaida == "colher de sopa") {
+            var valorConvertido = valorUnida * 16.7;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+
+        if (unidadeMedida == "xícara de chá" && unidadeMedidaSaida == "colher de chá") {
+            var valorConvertido = valorUnida * 50;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "xícara de chá" && unidadeMedidaSaida == "ml") {
+            var valorConvertido = valorUnida * 250;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "xícara de chá" && unidadeMedidaSaida == "xícara de chá") {
+            var valorConvertido = valorUnida;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "xícara de chá" && unidadeMedidaSaida == "grama") {
+            var valorConvertido = valorUnida * 120;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+
+                if (unidadeMedida == "grama" && unidadeMedidaSaida == "colher de sopa") {
+            var valorConvertido = valorUnida / 3;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+
+        if (unidadeMedida == "grama" && unidadeMedidaSaida == "colher de chá") {
+            var valorConvertido = valorUnida / 7;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "grama" && unidadeMedidaSaida == "ml") {
+            var valorConvertido = valorUnida * 120;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "grama" && unidadeMedidaSaida == "xícara de chá") {
+            var valorConvertido = valorUnida / 120;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+        if (unidadeMedida == "grama" && unidadeMedidaSaida == "grama") {
+            var valorConvertido = valorUnida;
+            document.getElementById("resultado").value = valorConvertido;
+        }
+    });
+</script>

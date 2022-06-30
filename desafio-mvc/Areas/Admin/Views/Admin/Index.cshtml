@@ -1,0 +1,100 @@
+ <link rel="stylesheet" href="~/css/painel.css">
+ <h1 style="text-align: center">Informações</h1>
+<body>
+    <div class="main-part">
+        <div class="cpanel ">
+            <div class="icon-part">
+                <i class="fa fa-home" aria-hidden="true"></i><br>
+                <br>
+                <p>Pagina Inicial</p>
+            </div>
+            <div class="card-content-part">
+                <a asp-area="" asp-controller="Home" asp-action="Index">Clique Para Ir </a>
+            </div>
+        </div>
+        <div class="cpanel cpanel-green">
+            <div class="icon-part">
+                <i class="fa fa-camera" aria-hidden="true"></i><br>
+                <br>
+                <p>Imagens</p>
+            </div>
+            <div class="card-content-part">
+                <a asp-area="Admin" asp-controller="AdminImagens" asp-action="Index">Clique Para Ir </a>
+            </div>
+        </div>
+        <div class="cpanel cpanel-orange">
+            <div class="icon-part">
+                <i class="fa fa-tags" aria-hidden="true"></i><br>
+                <br>
+                <p>Categorias</p>
+            </div>
+            <div class="card-content-part">
+                <a asp-area="Admin" asp-controller="AdminCategorias" asp-action="Index">Clique Para Ir </a>
+            </div>
+        </div>
+        <div class="cpanel cpanel-blue">
+            <div class="icon-part">
+                <i class="fa fa-shopping-basket" aria-hidden="true"></i><br>
+                <br>
+                <p>Ingredientes</p>
+            </div>
+            <div class="card-content-part">
+                <a asp-area="Admin" asp-controller="AdminIngredientes" asp-action="Index">Clique Para Ir </a>
+            </div>
+        </div>
+        <div class="cpanel cpanel-red">
+            <div class="icon-part">
+                <i class="fa fa-thermometer" aria-hidden="true"></i><br>
+                <br>
+                <p>Unidades de Medidas</p>
+            </div>
+            <div class="card-content-part">
+                <a asp-area="Admin" asp-controller="AdminMedidas" asp-action="Index">Clique Para Ir </a>
+            </div>
+        </div>
+        <div class="cpanel cpanel-skyblue">
+            <div class="icon-part">
+                <i class="fa fa-file-text" aria-hidden="true"></i><br>
+                <br>
+                <p>Receitas</p>
+            </div>
+            <div class="card-content-part">
+                <a asp-area="Admin" asp-controller="AdminReceitas" asp-action="Index">Clique Para Ir </a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h1 style="text-align: center">Histórico de acesso dos usuarios</h1>
+    <div class="chart-container" >
+    <canvas class="line-chart"></canvas>
+    </div>
+    <p style="text-align: center">Receita ID</p>
+    <script>
+    var enderecoRelatorioUsuario = "https://localhost:5001/Admin/RelatorioUsuario";
+    var labels = [];
+    var data = [];
+    $.post(enderecoRelatorioUsuario, function(dados, status){
+        for(var i=0; i <dados.length; i++){
+            labels.push(dados[i].receitaId);
+            data.push(dados[i].quantidadeDeAcesso);
+        }
+
+        var canvas = document.getElementsByClassName("line-chart");
+        var grafico = new Chart(canvas, {
+            type: "line",
+            data:{
+                labels: labels,
+                datasets:[{
+                    label: "Quantidade de acesso x Id da receita",
+                    data: data,
+                    borderWidth: 5,
+                    borderColor: "#DEB887",
+                    backgroundColor: "#DEB887"
+                }]
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -1,0 +1,25 @@
+@model desafio_mvc.DTO.MedidaDTO
+@{
+    Layout = "_LayoutAdmin";
+}
+<h3>Editar Medida</h3>
+<hr>
+<form class="form-horizontal" asp-area="Admin" asp-controller="AdminMedidas" asp-action="EditMedida"  method="post">
+    <input type="hidden" asp-for="MedidaId"> 
+    <div class="form-group">
+        <label asp-for="Nome" class="control-label"></label>
+        <input type="text" asp-for="Nome" class="form-control" placeholder="Nome da Medida"/>
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Simbolo" class="control-label"></label>
+        <input asp-for="Simbolo" class="form-control" placeholder="Simbolo da Medida"/>
+        <span asp-validation-for="Simbolo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-success" value="Atualizar" />
+    </div>
+</form>
+<div>
+    <a asp-action="Index">Voltar para a lista</a>
+</div>

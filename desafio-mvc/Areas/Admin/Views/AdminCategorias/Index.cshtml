@@ -1,0 +1,56 @@
+@model IEnumerable<desafio_mvc.Models.Categoria>
+
+@{
+    Layout = "_LayoutAdmin";
+}
+<h1 class="text-title">Categorias</h1><br>
+<button class="button-beat">
+    <a asp-area="Admin" asp-controller="AdminCategorias" asp-action="Create" style="color: white;">
+        <span class="text">Criar Nova Categoria</span>
+    </a>
+</button><br><br>
+<script>
+    $(document).ready(function () {
+        $('#categorias').DataTable({
+            "language":{
+                "lengthMenu": "Mostrando _MENU_ registros por página",
+                "zeroRecords": "Desculpa, Nada encontrado.",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "search":         "Buscar:",
+                "paginate": {
+                    "first":      "Primeiro",
+                    "last":       "Último",
+                    "next":       "Próximo",
+                    "previous":   "Anterior"
+                }
+            }
+        });
+    });
+</script>
+<table id="categorias" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var categoria in Model)
+        {
+            <tr>
+                <td>@categoria.CategoriaId</td>
+                <td>@categoria.Nome</td>
+                <td>@categoria.Descricao</td>
+                <td><a class="btn btn-primary" href="/Admin/AdminCategorias/Edit/@categoria.CategoriaId">Editar</a> 
+                <form asp-area="Admin" asp-action="Delete" asp-controller="AdminCategorias" style="display: inline;">
+                    <input type="hidden" name="id" id="id" value="@categoria.CategoriaId">
+                    <button class="btn btn-danger" onclick="return confirm('Deseja realmente deletar?')">Deletar</button>
+                </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,39 @@
+@model Receita
+<a asp-area="" asp-controller="Home" asp-action="Detalhes" asp-route-ReceitaId="@Model.ReceitaId"style="color: #4F4F4F;">
+<div class="card-client" >
+    <div class="user-picture">
+        <img src="/images/produtos/@Model.ImagemUrl" class="img-fluid">
+    </div>
+    <p class="name-client">  @Model.Nome
+        <span>@Model.Categoria.Nome
+        </span>
+    </p>
+    <div class="social-media">
+        <a>
+            <img src="/images/clock.png" width="20 px" height="20 px">
+                <span>@Model.TempoDePreparo m</span>
+            </svg>
+            <span class="tooltip-social">Tempo de Preparo</span>
+        </a>
+
+        <a>
+            <img src="/images/dificult.png" width="20 px" height="20 px">
+                <span> @if (@Model.Dificuldade == 0)
+                    {
+                        <span>Fácil</span>
+                    }
+                    else if (@Model.Dificuldade == 1)
+                    {
+                        <span>Médio</span>
+                    }
+                    else
+                    {
+                        <span>Difícil</span>
+                    }</span>
+            </svg>
+            <span class="tooltip-social">Dificuldade</span>
+        </a>
+
+    </div>
+</div>
+</a>

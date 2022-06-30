@@ -1,0 +1,84 @@
+@model desafio_mvc.DTO.ReceitaDTO
+@{
+    Layout = "_LayoutAdmin";
+}
+<h1>Criar Receita</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form class="form-horizontal" id="finalizarReceita" asp-area="Admin" asp-controller="AdminReceitas"
+            asp-action="Create" method="post">
+
+            <label asp-for="Nome" class="control-label"></label>
+            <input type="text" asp-for="Nome" class="form-control" placeholder="Nome da Receita" id="receitaNome" />
+            <span asp-validation-for="Nome" class="text-danger"></span><br>
+
+            <label asp-for="TempoDePreparo" class="control-label">Tempo de Preparo</label>
+            <input type="number" asp-for="TempoDePreparo" class="form-control" placeholder="Tempo de receita em minutos"
+                id="receitaTempo" />
+            <span asp-validation-for="TempoDePreparo" class="text-danger"></span><br>
+
+            <label asp-for="ImagemUrl" class="control-label">URL da imagem</label><br>
+            <span>Exemplo para adicionar imagem salva no gerenciador: salada.png </span><br>
+            <input type="text" asp-for="ImagemUrl" class="form-control" placeholder="URL da imagem" id="receitaURL" />
+            <span asp-validation-for="ImagemUrl" class="text-danger"></span><br>
+
+            <label class="control-label">Ingredientes</label><br>
+            <button type="button" id="add" class="btn btn-success">Adicionar Ingrediente a receita</button>
+
+            <div id="ingrediente-list"></div><br>
+
+            <label asp-for="ModoDePreparo" class="control-label">Modo de Preparo</label><br>
+            <textarea asp-for="ModoDePreparo" rows="4" cols="70" id="receitaPreparo"></textarea>
+            <span asp-validation-for="ModoDePreparo" class="text-danger"></span><br>
+
+            <label asp-for="NomeDoAutor" class="control-label">Nome do Autor</label>
+            <input type="text" asp-for="NomeDoAutor" class="form-control" placeholder="Nome do Autor"
+                id="receitaAutor" />
+            <span asp-validation-for="NomeDoAutor" class="text-danger"></span><br>
+
+            <label asp-for="Rendimento" class="control-label"></label>
+            <input type="number" asp-for="Rendimento" class="form-control"
+                placeholder="Rendimento para quantidade de pessoas ex: 2" id="receitaRendimento" />
+            <span asp-validation-for="Rendimento" class="text-danger"></span><br>
+
+            <label asp-for="Dificuldade">Dificuldade</label>
+            <select class="form-control" asp-for="Dificuldade" id="receitaDificuldade">
+                <option value="0">Fácil</option>
+                <option value="1">Médio</option>
+                <option value="2">Díficil</option>
+            </select><br>
+
+            <label asp-for="CategoriaId">Categoria</label>
+            <select class="form-control" asp-for="CategoriaId"
+                asp-items='@(new SelectList(@ViewBag.Categorias,"CategoriaId","Nome"))'
+                id="receitaCategoria"></select><br>
+
+            <div class="form-group">
+                <input type="submit" value="Criar Receita" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para a lista</a>
+</div>
+
+<script>
+    var enderecoReceita = "https://localhost:5001/admin/AdminReceitas/AddMorePartialView/";
+    $('#add').on('click', function () {
+        $.ajax({
+            url: enderecoReceita,
+            type: 'GET',
+            data: {
+            },
+            success: function (result) {
+                $('#ingrediente-list').append(result);
+            },
+            error: function () {
+            }
+        });
+    });
+</script>

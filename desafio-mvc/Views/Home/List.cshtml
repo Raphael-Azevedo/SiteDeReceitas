@@ -1,0 +1,14 @@
+@model ReceitaPreferidaViewModel
+<br>
+<div>
+    <h2>@Model.CategoriaAtual</h2>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var receita in Model.Receitas)
+        {
+          <partial name="_ReceitaResumo" for="@receita"/>
+        }
+    </div>
+</div>
