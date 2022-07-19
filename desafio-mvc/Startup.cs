@@ -80,7 +80,7 @@ namespace desafio_mvc
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            PopulaDb.IncluiDadosDB(app);
             app.UseRouting();
 
             app.UseAuthentication();
